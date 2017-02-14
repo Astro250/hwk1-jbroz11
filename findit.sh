@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Here's the first line of code to write to do the first homework assignment.
 #
@@ -12,3 +12,15 @@
 
 dir=$1
 
+if ! [ -d $dir ]; then
+  echo "This directory does not exist!"
+  exit 0
+fi 
+
+for item in "$dir"/*; do
+  name=${item%.*}
+  type=${item##*.}
+  if [[ $type == fits ]] && ! [[ -f "$name".cat ]]; then
+    echo $item
+  fi
+done
